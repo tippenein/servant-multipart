@@ -1,19 +1,19 @@
-{-# LANGUAGE CPP #-}
 {-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE DataKinds #-}
-{-# LANGUAGE TypeFamilies #-}
-{-# LANGUAGE InstanceSigs #-}
-{-# LANGUAGE TypeOperators #-}
-{-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE OverloadedStrings #-}
-{-# LANGUAGE ScopedTypeVariables #-}
-{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 {-# LANGUAGE StandaloneDeriving #-}
-{-# LANGUAGE UndecidableInstances #-}
 {-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE TypeFamilies #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
 -- | @multipart/form-data@ server-side support for servant.
 --   See servant-multipart-api for the API definitions.
 module Servant.Multipart
@@ -38,7 +38,7 @@ module Servant.Multipart
 
 import Servant.Multipart.API
 
-import Control.Lens ((<>~), (&), view, (.~))
+import Control.Lens (view, (&), (.~), (<>~))
 import Control.Monad.IO.Class
 import Control.Monad.Trans.Resource
 import Data.List (find)
@@ -59,7 +59,7 @@ import Servant.Foreign hiding (contentType)
 import Servant.Server.Internal
 import System.Directory
 
-import qualified Data.ByteString      as SBS
+import qualified Data.ByteString as SBS
 
 -- | Lookup a textual input with the given @name@ attribute.
 lookupInput :: Text -> MultipartData tag -> Either String Text
@@ -269,7 +269,7 @@ defaultTmpBackendOptions = TmpBackendOptions
 --   'defaultBackendOptions' respectively.
 defaultMultipartOptions :: MultipartBackend tag => Proxy tag -> MultipartOptions tag
 defaultMultipartOptions pTag = MultipartOptions
-  { generalOptions = defaultParseRequestBodyOptions
+  { generalOptions = noLimitParseRequestBodyOptions
   , backendOptions = defaultBackendOptions pTag
   }
 
